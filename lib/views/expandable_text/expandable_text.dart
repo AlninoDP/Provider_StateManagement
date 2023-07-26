@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:learnflutter/components/custom_text_widget.dart';
+import 'package:learnflutter/models/theme_services.dart';
+import 'package:provider/provider.dart';
 
 class ExpandableTextScreen extends StatelessWidget {
   const ExpandableTextScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    bool themeServices = context.watch<ThemeServices>().isDarkModeOn;
     String text =
         'tulisan ini panjang sampai tidak bisa muat dalam empat line, maka dari itu kita gunakan show dialog dan alert box';
     return Scaffold(
       appBar: AppBar(
         title: const CustomTextWidget(text: 'Expandable Text'),
         centerTitle: true,
+        actions: [
+          IconButton(
+              iconSize: 40,
+              onPressed: () {
+                Provider.of<ThemeServices>(context, listen: false)
+                    .toggleTheme();
+              },
+              icon: themeServices
+                  ? const Icon(Icons.toggle_on_sharp)
+                  : const Icon(
+                      Icons.toggle_off_sharp,
+                    ))
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -99,7 +115,7 @@ class ButtonDialog extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('OK'))
+                        child: const Text('OK'))
                   ],
                 );
               });

@@ -54,7 +54,10 @@ class _MainMenuState extends State<MainMenu> {
                     },
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                    child: const Icon(Icons.remove)),
+                    child: const Icon(
+                      Icons.remove,
+                      color: Colors.white,
+                    )),
                 ElevatedButton(
                     onPressed: () {
                       Provider.of<CountModel>(context, listen: false)
@@ -62,14 +65,15 @@ class _MainMenuState extends State<MainMenu> {
                     },
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                    child: const Icon(Icons.add)),
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                    )),
               ],
             ),
           ],
         ),
       );
-
-      ;
     });
   }
 }

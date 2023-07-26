@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learnflutter/models/movie_data.dart';
 import 'package:learnflutter/models/movie_model.dart';
+import 'package:learnflutter/models/theme_services.dart';
 import 'package:provider/provider.dart';
 
 class MovieListScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class MovieListScreen extends StatefulWidget {
 class _MovieListScreenState extends State<MovieListScreen> {
   @override
   Widget build(BuildContext context) {
+    bool themeServices = context.watch<ThemeServices>().isDarkModeOn;
     void showSnackbar(String snackBarText) {
       final SnackBar snackBar = SnackBar(
           duration: const Duration(milliseconds: 500),
@@ -26,6 +28,19 @@ class _MovieListScreenState extends State<MovieListScreen> {
       appBar: AppBar(
         title: const Text("Movie List "),
         centerTitle: true,
+        actions: [
+          IconButton(
+              iconSize: 40,
+              onPressed: () {
+                Provider.of<ThemeServices>(context, listen: false)
+                    .toggleTheme();
+              },
+              icon: themeServices
+                  ? const Icon(Icons.toggle_on_sharp)
+                  : const Icon(
+                      Icons.toggle_off_sharp,
+                    ))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

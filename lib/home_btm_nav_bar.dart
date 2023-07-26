@@ -24,6 +24,7 @@ class _HomeBottomNavBarState extends State<HomeBottomNavBar> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+          iconSize: 25,
           currentIndex: _navBarCurrentIndex,
           onTap: (index) {
             setState(() {
