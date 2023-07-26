@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learnflutter/models/movie_data.dart';
 import 'package:learnflutter/models/movie_model.dart';
-import 'package:learnflutter/views/fav_movie/fav_movie_screen.dart';
 import 'package:provider/provider.dart';
 
 class MovieListScreen extends StatefulWidget {
@@ -14,6 +13,13 @@ class MovieListScreen extends StatefulWidget {
 class _MovieListScreenState extends State<MovieListScreen> {
   @override
   Widget build(BuildContext context) {
+    void showSnackbar(String snackBarText) {
+      final SnackBar snackBar = SnackBar(
+          duration: const Duration(milliseconds: 500),
+          content: Text(snackBarText));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
     List<MovieModel> listMovie = context.watch<MovieData>().movies;
     List<MovieModel> myList = context.watch<MovieData>().myList;
     return Scaffold(
@@ -30,8 +36,7 @@ class _MovieListScreenState extends State<MovieListScreen> {
                 elevation: 4,
                 child: ListTile(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const FavMovieScreen()));
+                    Navigator.pushNamed(context, '/favMovieScreen');
                   },
                   leading: const Icon(
                     Icons.favorite,
@@ -77,10 +82,14 @@ class _MovieListScreenState extends State<MovieListScreen> {
                         onTap: () {
                           if (!myList.contains(currentMovie)) {
                             context.read<MovieData>().addToMyList(currentMovie);
+                            showSnackbar(
+                                "${currentMovie.movieTitle} Added To My List");
                           } else {
                             context
                                 .read<MovieData>()
                                 .removeFromMyList(currentMovie);
+                            showSnackbar(
+                                "${currentMovie.movieTitle} Removed From My List");
                           }
                         },
                       ),

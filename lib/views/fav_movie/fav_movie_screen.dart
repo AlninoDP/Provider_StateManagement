@@ -8,6 +8,13 @@ class FavMovieScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void showSnackbar(String snackBarText) {
+      final SnackBar snackBar = SnackBar(
+          duration: const Duration(milliseconds: 500),
+          content: Text(snackBarText));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
     List<MovieModel> myList = context.watch<MovieData>().myList;
     return Scaffold(
       appBar: AppBar(
@@ -15,7 +22,7 @@ class FavMovieScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             Expanded(
@@ -25,7 +32,7 @@ class FavMovieScreen extends StatelessWidget {
                       final currentMovie = myList[index];
                       return Card(
                         elevation: 4,
-                        color: Colors.blue,
+                        color: Colors.lightBlue,
                         child: ListTile(
                           title: Text(
                             currentMovie.movieTitle,
@@ -35,6 +42,18 @@ class FavMovieScreen extends StatelessWidget {
                           subtitle: Text(currentMovie.movieDuration,
                               style: const TextStyle(
                                   color: Colors.white, fontSize: 15)),
+                          trailing: const Icon(
+                            Icons.cancel_outlined,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                          onTap: () {
+                            context
+                                .read<MovieData>()
+                                .removeFromMyList(currentMovie);
+                            showSnackbar(
+                                "${currentMovie.movieTitle} Removed From My List");
+                          },
                         ),
                       );
                     }))
