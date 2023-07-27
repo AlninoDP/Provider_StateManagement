@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class AppThemes {
   static final ThemeData lightTheme = ThemeData(
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Colors.blue,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: Colors.blue[900],
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.black),
-    colorScheme: const ColorScheme.light(
-      primary: Colors.blue,
+    colorScheme: ColorScheme.light(
+      primary: Colors.blue[900]!,
       onPrimary: Colors.white,
       secondary: Colors.blue,
       onSecondary: Colors.white,
@@ -15,12 +15,15 @@ class AppThemes {
     ),
   );
   static final ThemeData darkTheme = ThemeData(
-    bottomNavigationBarTheme:
-        BottomNavigationBarThemeData(backgroundColor: Colors.red[900]),
+    appBarTheme: const AppBarTheme(color: Colors.blueGrey),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: Colors.blueGrey, selectedItemColor: Colors.white),
+    scaffoldBackgroundColor: Colors.blueGrey[700],
     colorScheme: const ColorScheme.dark(
-        primary: Colors.black,
-        onPrimary: Colors.red,
+        primary: Colors.blueGrey,
+        onPrimary: Colors.white,
         secondary: Colors.black,
-        onSecondary: Colors.red),
+        onSecondary: Colors.white,
+        background: Colors.blueGrey),
   );
 }
