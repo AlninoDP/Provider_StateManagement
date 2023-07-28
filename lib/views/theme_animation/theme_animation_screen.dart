@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:learnflutter/components/custom_text_widget.dart';
+import 'package:learnflutter/views/theme_animation/widgets/moon.dart';
 import 'package:learnflutter/models/theme_services.dart';
+import 'package:learnflutter/views/theme_animation/widgets/star.dart';
+import 'package:learnflutter/views/theme_animation/widgets/sun.dart';
 import 'package:provider/provider.dart';
 
 class ThemeAnimationScreen extends StatefulWidget {
@@ -18,7 +21,7 @@ class _ThemeAnimationScreenState extends State<ThemeAnimationScreen> {
     final screenWidth = MediaQuery.sizeOf(context).width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Movie List "),
+        title: const Text("Theme Animation"),
         centerTitle: true,
         actions: [
           IconButton(
@@ -61,6 +64,54 @@ class _ThemeAnimationScreenState extends State<ThemeAnimationScreen> {
                           Color(0xdd940899)
                         ])),
           child: Stack(children: [
+            Positioned(
+              top: 40,
+              left: 320,
+              child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 400),
+                  opacity: themeServices ? 1 : 0,
+                  child: const Star()),
+            ),
+            Positioned(
+              top: 200,
+              left: 60,
+              child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 400),
+                  opacity: themeServices ? 1 : 0,
+                  child: const Star()),
+            ),
+            Positioned(
+              top: 130,
+              left: 40,
+              child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 400),
+                  opacity: themeServices ? 1 : 0,
+                  child: const Star()),
+            ),
+            Positioned(
+              top: 50,
+              left: 100,
+              child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 400),
+                  opacity: themeServices ? 1 : 0,
+                  child: const Star()),
+            ),
+            AnimatedPositioned(
+                duration: const Duration(milliseconds: 600),
+                top: themeServices ? 100 : 350,
+                left: themeServices ? 200 : 600,
+                child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 600),
+                    opacity: themeServices ? 1 : 0,
+                    child: const Moon())),
+            Center(
+                child: AnimatedPadding(
+              duration: const Duration(milliseconds: 500),
+              padding: themeServices
+                  ? const EdgeInsets.only(top: 300)
+                  : const EdgeInsets.only(top: 60),
+              child: const Sun(),
+            )),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
